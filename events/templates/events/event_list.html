@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopEvents</title>
+</head>
+<body>
+    <h1>Upcoming Events</h1>
+
+    {% for event in events %}
+        <article>
+            <h2>
+                <a href="{% url 'event-detail' event.pk %}">
+                    {{ event.title }}
+                </a>
+            </h2>
+            {% if event.image %}
+                <img
+                    src="{{ event.image.url }}"
+                    alt="{{ event.title }}"
+                    width="300"
+                >
+            {% endif %}
+            <p>Location: {{ event.location }}</p>
+            <p>Duration: {{ event.start_datetime }} - {{ event.end_datetime }}</p>
+            <p>{{ event.description }}</p>
+        </article>
+    {% empty %}
+        <p>No events have been created yet.</p>
+    {% endfor %}
+</body>
+</html>
