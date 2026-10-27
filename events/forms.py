@@ -35,9 +35,8 @@ class EventForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
-
-        user = kwargs.get("user")
 
         self.fields["start_datetime"].input_formats = [
             "%Y-%m-%dT%H:%M",
